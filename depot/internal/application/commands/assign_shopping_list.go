@@ -25,7 +25,7 @@ func (h AssignShoppingListHandler) AssignShoppingList(ctx context.Context, cmd A
 		return err
 	}
 
-	err = list.AssignBot(cmd.BotID)
+	err = list.Assign(cmd.BotID)
 	if err != nil {
 		return err
 	}

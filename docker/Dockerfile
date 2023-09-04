@@ -9,7 +9,7 @@ COPY go.* ./
 RUN go mod download
 
 # Copy local code to the container image.
-COPY ../eda-in-golang ./
+COPY .. ./
 
 # Build the binary.
 RUN go build -v -o monolith ./cmd/mallbots

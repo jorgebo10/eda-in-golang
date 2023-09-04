@@ -5,7 +5,7 @@ services:
     container_name: monolith
     hostname: monolith
     build:
-      context: eda-in-golang
+      context: .
       dockerfile: docker/Dockerfile
     ports:
       - '8080:8080'

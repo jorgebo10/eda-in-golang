@@ -2,11 +2,13 @@ package logging
 
 import (
 	"context"
+
+	"github.com/rs/zerolog"
+
 	"eda-in-golang/depot/internal/application"
 	"eda-in-golang/depot/internal/application/commands"
 	"eda-in-golang/depot/internal/application/queries"
 	"eda-in-golang/depot/internal/domain"
-	"github.com/rs/zerolog"
 )
 
 type Application struct {
@@ -28,6 +30,7 @@ func (a Application) CreateShoppingList(ctx context.Context, cmd commands.Create
 	defer func() { a.logger.Info().Err(err).Msg("<-- Depot.CreateShoppingList") }()
 	return a.App.CreateShoppingList(ctx, cmd)
 }
+
 func (a Application) CancelShoppingList(ctx context.Context, cmd commands.CancelShoppingList) (err error) {
 	a.logger.Info().Msg("--> Depot.CancelShoppingList")
 	defer func() { a.logger.Info().Err(err).Msg("<-- Depot.CancelShoppingList") }()

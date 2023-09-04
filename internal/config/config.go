@@ -1,12 +1,15 @@
 package config
 
 import (
-	"eda-in-golang/internal/rpc"
-	"eda-in-golang/internal/web"
-	"github.com/kelseyhightower/envconfig"
-	"github.com/stackus/dotenv"
 	"os"
 	"time"
+
+	"github.com/kelseyhightower/envconfig"
+
+	"github.com/stackus/dotenv"
+
+	"eda-in-golang/internal/rpc"
+	"eda-in-golang/internal/web"
 )
 
 type (

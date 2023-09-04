@@ -2,8 +2,10 @@ package commands
 
 import (
 	"context"
-	"eda-in-golang/depot/internal/domain"
+
 	"github.com/stackus/errors"
+
+	"eda-in-golang/depot/internal/domain"
 )
 
 type CreateShoppingList struct {
@@ -18,10 +20,7 @@ type CreateShoppingListHandler struct {
 	products      domain.ProductRepository
 }
 
-func NewCreateShoppingListHandler(
-	shoppingLists domain.ShoppingListRepository,
-	stores domain.StoreRepository,
-	products domain.ProductRepository) CreateShoppingListHandler {
+func NewCreateShoppingListHandler(shoppingLists domain.ShoppingListRepository, stores domain.StoreRepository, products domain.ProductRepository) CreateShoppingListHandler {
 	return CreateShoppingListHandler{
 		shoppingLists: shoppingLists,
 		stores:        stores,
@@ -30,9 +29,10 @@ func NewCreateShoppingListHandler(
 }
 
 func (h CreateShoppingListHandler) CreateShoppingList(ctx context.Context, cmd CreateShoppingList) error {
-	list := domain.CreateShoppingList(cmd.ID, cmd.OrderID)
+	list := domain.CreateShopping(cmd.ID, cmd.OrderID)
 
 	for _, item := range cmd.Items {
+		// horribly inefficient
 		store, err := h.stores.Find(ctx, item.StoreID)
 		if err != nil {
 			return errors.Wrap(err, "building shopping list")
@@ -46,5 +46,6 @@ func (h CreateShoppingListHandler) CreateShoppingList(ctx context.Context, cmd C
 			return errors.Wrap(err, "building shopping list")
 		}
 	}
+
 	return errors.Wrap(h.shoppingLists.Save(ctx, list), "scheduling shopping")
 }
